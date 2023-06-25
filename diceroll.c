@@ -17,6 +17,7 @@ int roll_n_dice(int dice, int sides)
 {
 	int d;
 	int total = 0;
+    
 	if (sides < 2)
 	{
 		printf("Need at least 2 sides.\n");

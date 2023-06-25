@@ -4,6 +4,7 @@
 #include <stdlib.h> /*for library srand() */
 #include <time.h> /*for time() */
 #include "diceroll.h" /*for roll_n_dice() */
+#include "kolejka.h"
 
 /*and for roll_count */
 int main(void)
@@ -11,9 +12,13 @@ int main(void)
 	int dice, roll;
 	int sides;
     int status;
+    int kolejki;
     
 	srand((unsigned int) time(0)); /*randomize seed */
+
+    //kolejki = kolejka();
 	printf("Enter the number of sides per die, 0 to stop.\n");
+    
 	while (scanf("%d", &sides) == 1 && sides > 0)
 	{
 		printf("How many dice?\n");
@@ -32,11 +37,17 @@ int main(void)
 				continue; /*new loop cycle */
 			}
 		}
+        kolejki = kolejka();
 
-		roll = roll_n_dice(dice, sides);
-		printf("You have rolled a %d using %d %d-sided dice.\n",
-			roll, dice, sides);
-		printf("How many sides? Enter 0 to stop.\n");
+        printf("Here are %d sets of %d %d-sided throws.\n",kolejki,dice,sides);
+        for(int i=0; i<kolejki; i++)
+		{
+            roll = roll_n_dice(dice, sides);
+		printf("%d  |  ", roll);
+        }
+
+        
+		printf("\nHow many sides? Enter 0 to stop.\n");
 	}
 
 	printf("The rollem() function was called %d times.\n",
